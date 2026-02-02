@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madam Boutique | Dress Comparison</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #fff5f7;
+  --primary: #c2185b;
+  --secondary: #f8bbd0;
+  --accent: #d4af37;
+  --text: #333333;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body { 
+  background: var(--bg); 
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+
+/* NAVBAR STYLES */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+nav ul li a {
+  position: relative;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding-bottom: 6px;
+  transition: color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.35s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav ul li a:hover {
+  color: var(--primary);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+}
+
+/* Cart wrapper */
+.cart-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: var(--primary);
+  color: white;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 50%;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Mobile Menu */
+@media (max-width: 900px) {
+  nav ul {
+    position: absolute;
+    top: 85px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--secondary);
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  nav ul.active {
+    max-height: 500px;
+  }
+
+  nav ul li {
+    padding: 15px 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* HEADER STYLES - Match Main Site */
+header {
+  background: var(--secondary);
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 85px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+.navbar-logo {
+  height: 70px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 18px;
+  font-size: 18px;
+  align-items: center;
+}
+
+.nav-icons i {
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.nav-icons i:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.signin-text {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.signin-text:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.btn-back {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-back:hover {
+  background: var(--text);
+  color: white;
+  border-color: var(--text);
+}
+
+/* PAGE TITLE */
+.page-title {
+  text-align: center;
+  padding: 50px 20px 30px;
+}
+
+.page-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.page-title p {
+  color: var(--text);
+  font-size: 16px;
+}
+
+/* SEARCH & SELECTION */
+.search-container { 
+  position: relative; 
+  margin-bottom: 15px; 
+}
+
+.search-input { 
+  border-radius: 12px; 
+  padding: 14px 20px; 
+  border: 2px solid var(--secondary); 
+  width: 100%; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(194, 24, 91, 0.15);
+}
+
+.autocomplete-dropdown { 
+  position: absolute; 
+  width: 100%; 
+  background: white; 
+  border-radius: 0 0 12px 12px; 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+  display: none; 
+  z-index: 10; 
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.device-item { 
+  display: flex; 
+  gap: 15px; 
+  padding: 12px 15px; 
+  cursor: pointer; 
+  border-bottom: 1px solid #f0f0f0; 
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.device-item:hover { 
+  background: #fff0f6; 
+  transform: translateX(5px);
+}
+
+.device-item img { 
+  width: 60px; 
+  height: 80px; 
+  object-fit: cover; 
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.device-item-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* IMAGE BOXES */
+.image-box { 
+  background: white; 
+  border-radius: 18px; 
+  padding: 30px; 
+  min-height: 280px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  transition: all 0.35s ease; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+  border: 2px solid var(--secondary);
+  margin-bottom: 20px;
+}
+
+.image-box:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 20px 40px rgba(194, 24, 91, 0.15); 
+  border-color: var(--primary);
+}
+
+.image-box img { 
+  max-height: 240px; 
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.image-box:hover img {
+  transform: scale(1.05);
+}
+
+.placeholder-text {
+  color: #999;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* FABRIC SELECT */
+.fabric-select { 
+  margin-top: 10px; 
+  border-radius: 12px; 
+  border: 2px solid var(--secondary);
+  padding: 12px 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.fabric-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(194, 24, 91, 0.15);
+}
+
+/* COMPARE BUTTON */
+.btn-compare { 
+  background: var(--primary); 
+  color: white; 
+  border-radius: 30px; 
+  padding: 14px 50px; 
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease; 
+  border: none; 
+  box-shadow: 0 4px 15px rgba(194, 24, 91, 0.3);
+  margin: 30px 0;
+}
+
+.btn-compare:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 25px rgba(194, 24, 91, 0.4); 
+  background: var(--accent);
+  color: white;
+}
+
+.btn-compare:active {
+  transform: translateY(-1px);
+}
+
+/* COMPARISON TABLE */
+#comparisonSection { 
+  display: none; 
+  margin-top: 50px; 
+  background: white; 
+  color: var(--text); 
+  border-radius: 18px; 
+  padding: 40px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+  border: 2px solid var(--secondary);
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#comparisonSection h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--primary);
+  margin-bottom: 30px;
+}
+
+.table-custom { 
+  width: 100%; 
+  background: transparent; 
+}
+
+.table-custom td, 
+.table-custom th { 
+  padding: 18px 15px; 
+  border-bottom: 1px solid var(--secondary); 
+  text-align: center;
+  font-size: 15px;
+}
+
+.table-custom th:first-child, 
+.table-custom td:first-child { 
+  text-align: left; 
+  font-weight: 600;
+}
+
+.table-custom th { 
+  color: var(--primary); 
+  font-weight: 700;
+  background: #fff0f6;
+  font-size: 16px;
+}
+
+.table-custom tbody tr:hover {
+  background: #fafafa;
+}
+
+.check-green { 
+  color: #27ae60; 
+  font-size: 1.3rem; 
+}
+
+.cross-red { 
+  color: #e74c3c; 
+  font-size: 1.3rem; 
+}
+
+/* LOGIN MODAL */
+.login-card {
+  background: white;
+  width: 100%;
+  padding: 40px;
+  border-radius: 18px;
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 45px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header {
+    padding: 16px 20px;
+    height: auto;
+  }
+
+  .navbar-logo {
+    height: 50px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .page-title h1 {
+    font-size: 32px;
+  }
+
+  .image-box {
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  .image-box img {
+    max-height: 180px;
+  }
+
+  #comparisonSection {
+    padding: 25px 15px;
+    overflow-x: auto;
+  }
+
+  .table-custom {
+    font-size: 13px;
+  }
+
+  .table-custom td, 
+  .table-custom th {
+    padding: 12px 8px;
+  }
+
+  .btn-compare {
+    padding: 12px 35px;
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER / NAVIGATION -->
+<header>
+  <div class="navbar-brand">
+    <img src="./logo.png" class="navbar-logo" alt="Madam Boutique">
+  </div>
+
+  <nav>
+    <ul id="menu">
+      <li><a href="./index.html">HOME</a></li>
+      <li><a href="./index.html#sale" onclick="event.preventDefault();">SALE</a></li>
+      <li><a href="./index.html#new" onclick="event.preventDefault();">NEW ARRIVAL</a></li>
+      <li><a href="./index.html#summer" onclick="event.preventDefault();">SUMMER</a></li>
+      <li><a href="./index.html#winter" onclick="event.preventDefault();">WINTER</a></li>
+      <li><a href="./index.html#gallery" onclick="event.preventDefault();">GALLERY</a></li>
+      <li><a href="./index.html#accessories" onclick="event.preventDefault();">ACCESSORIES</a></li>
+      <li><a href="compare.html">COMPARE</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-icons">
+    <span class="signin-text" id="signinText" data-bs-toggle="modal" data-bs-target="#loginModal">Sign in</span>
+    <i class="fa-regular fa-user" onclick="location.href='../index.html'" title="Back to Shop"></i>
+    <div class="cart-wrapper" id="cartIcon">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="cart-badge" id="cartCount">0</span>
+    </div>
+    <i class="fa-solid fa-bars menu-toggle" id="toggle"></i>
+  </div>
+</header>
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+  <h1>Compare Dresses</h1>
+  <p>Select two dresses to compare their features side by side</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- LEFT SIDE - Dress 1 -->
+    <div class="col-md-6">
+      <div class="image-box">
+        <img id="car1Image" src="./kaddar3.webp" alt="Dress 1">
+      </div>
+      <div class="search-container">
+        <input class="search-input" id="search1" placeholder="🔍 Search for first dress...">
+        <div class="autocomplete-dropdown" id="dropdown1">
+          <div id="results1"></div>
+        </div>
+      </div>
+      <select class="form-select fabric-select" id="fabric1">
+        <option value="">Select Fabric (Optional)</option>
+        <option value="Lawn">Lawn</option>
+        <option value="Khaddar">Khaddar</option>
+        <option value="Cotton">Cotton</option>
+        <option value="Chiffon">Chiffon</option>
+        <option value="Velvet">Velvet</option>
+      </select>
+    </div>
+
+    <!-- RIGHT SIDE - Dress 2 -->
+    <div class="col-md-6">
+      <div class="image-box">
+        <img id="car2Image" src="./pic8.webp" alt="Dress 2">
+      </div>
+      <div class="search-container">
+        <input class="search-input" id="search2" placeholder="🔍 Search for second dress...">
+        <div class="autocomplete-dropdown" id="dropdown2">
+          <div id="results2"></div>
+        </div>
+      </div>
+      <select class="form-select fabric-select" id="fabric2">
+        <option value="">Select Fabric (Optional)</option>
+        <option value="Lawn">Lawn</option>
+        <option value="Khaddar">Khaddar</option>
+        <option value="Cotton">Cotton</option>
+        <option value="Chiffon">Chiffon</option>
+        <option value="Velvet">Velvet</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- COMPARE BUTTON -->
+  <div class="text-center mt-4">
+    <button id="compareBtn" class="btn btn-compare">
+      Compare Dresses
+    </button>
+  </div>
+
+  <!-- COMPARISON RESULTS -->
+  <div id="comparisonSection">
+    <h3 class="text-center mb-4 fw-bold">Comparison Results</h3>
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Features</th>
+            <th id="name1">Dress 1</th>
+            <th id="name2">Dress 2</th>
+          </tr>
+        </thead>
+        <tbody id="comparisonBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow">
+      <div class="modal-body p-0">
+        <div class="login-card">
+          <h2>Sign in</h2>
+
+          <div class="input-group">
+            <i class="ri-user-line"></i>
+            <input type="text" id="loginUsername" placeholder="Username or Email" aria-label="Username">
+          </div>
+
+          <div class="input-group">
+            <i class="ri-lock-line"></i>
+            <input type="password" id="loginPassword" placeholder="Enter your Password" aria-label="Password">
+          </div>
+
+          <button class="btn-login" id="loginBtn">Sign in</button>
+
+          <div class="text-center mt-3">
+            <small>Don't have an account? <a href="#" style="color: var(--primary); text-decoration: none;">Sign up</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Mobile menu toggle
+const toggleBtn = document.getElementById('toggle');
+const menu = document.getElementById('menu');
+
+if (toggleBtn && menu) {
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('active');
+    });
+  });
+}
+
+$(function(){
+  // Updated dress data with more realistic information
+  const dresses = [
+    {name:"Hursil Dress", price:"PKR 11,999", summer:false, winter:true, occasion:"Formal / Festive", fabrics:"Micro Velvet", stitching: "Stitched", img:"./new7.webp"},
+    {name:"Emerald Tide", price:"PKR 7,990", summer:true, winter:false, occasion:"Semi-Formal", fabrics:"Pure Lawn", stitching: "Unstitched", img:"./new4.webp"},
+    {name:"Lilac Fields", price:"PKR 6,290", summer:true, winter:false, occasion:"Casual Wear", fabrics:"Cotton Blend", stitching: "Unstitched", img:"./new5.webp"},
+    {name:"Velvet Kaftan Shirt", price:"PKR 8,499", summer:false, winter:true, occasion:"Wedding / Festive", fabrics:"Velvet", stitching: "Stitched", img:"./velvet1.webp"},
+    {name:"3 Pc Printed Lawn Suit", price:"PKR 3,890", summer:true, winter:false, occasion:"Daily Wear", fabrics:"Swiss Lawn", stitching: "Unstitched", img:"./pic1.webp"},
+    {name:"Embroidered 2Pc Velvet", price:"PKR 10,867", summer:false, winter:true, occasion:"Formal", fabrics:"Velvet", stitching: "Stitched", img:"./velvet3.webp"},
+    {name:"Blue Lawn Suit", price:"PKR 3,890", summer:true, winter:false, occasion:"Casual", fabrics:"Lawn", stitching: "Unstitched", img:"./pic7.webp"},
+    {name:"3Pc Khaddar Classic", price:"PKR 6,396", summer:false, winter:true, occasion:"Winter Daily", fabrics:"Khaddar", stitching: "Unstitched", img:"./kaddar4.webp"},
+  ];
+
+  let selected1 = null;
+  let selected2 = null;
+
+  // Handle search functionality
+  function handleSearch(input, drop, res, imgElementId, side){
+    $("#"+input).on("input", function(){
+      let val = this.value.toLowerCase().trim();
+      $("#"+res).empty();
+      
+      if(!val){ 
+        $("#"+drop).hide(); 
+        return; 
+      }
+      
+      const filtered = dresses.filter(d => d.name.toLowerCase().includes(val));
+      
+      if(filtered.length === 0) {
+        $("#"+res).append('<div class="device-item"><div>No dresses found</div></div>');
+      } else {
+        filtered.forEach(d => {
+          $("#"+res).append(`
+            <div class="device-item" data-name="${d.name}">
+              <img src="${d.img}" onerror="this.src='https://via.placeholder.com/60x80?text=No+Img'" alt="${d.name}">
+              <div class="device-item-name">${d.name}</div>
+            </div>
+          `);
+        });
+      }
+      
+      $("#"+drop).show();
+    });
+
+    // Handle item selection
+    $(document).on("click", "#"+res+" .device-item", function(){
+      let name = $(this).data("name");
+      let item = dresses.find(d => d.name === name);
+      
+      if(!item) return;
+      
+      if(side === 1) {
+        selected1 = item;
+      } else {
+        selected2 = item;
+      }
+      
+      $("#"+input).val(name);
+      $("#"+imgElementId).attr("src", item.img).attr("alt", item.name);
+      $("#"+drop).hide();
+    });
+  }
+
+  // Initialize search for both sides
+  handleSearch("search1", "dropdown1", "results1", "car1Image", 1);
+  handleSearch("search2", "dropdown2", "results2", "car2Image", 2);
+
+  // Close dropdowns when clicking outside
+  $(document).on("click", function(e) {
+    if (!$(e.target).closest('.search-container').length) {
+      $('.autocomplete-dropdown').hide();
+    }
+  });
+
+  // Compare button click
+  $("#compareBtn").click(function(){
+    if(!selected1 || !selected2){
+      alert("⚠️ Please select two dresses to compare.");
+      return;
+    }
+
+    if(selected1.name === selected2.name){
+      alert("⚠️ Please select two different dresses.");
+      return;
+    }
+
+    // Update table headers
+    $("#name1").text(selected1.name);
+    $("#name2").text(selected2.name);
+
+    // Define comparison categories
+    const categories = [
+      {label: "Price", key: "price"},
+      {label: "Summer Collection", key: "summer", isIcon: true},
+      {label: "Winter Collection", key: "winter", isIcon: true},
+      {label: "Occasions", key: "occasion"},
+      {label: "Fabrics", key: "fabrics"},
+      {label: "Stitching Status", key: "stitching"}
+    ];
+
+    // Build table rows
+    let html = "";
+    categories.forEach(c => {
+      html += `<tr><td><strong>${c.label}</strong></td>`;
+      
+      [selected1, selected2].forEach(sel => {
+        let val = sel[c.key];
+        if(c.isIcon){
+          val = val 
+            ? '<i class="fas fa-check-circle check-green"></i>' 
+            : '<i class="fas fa-times-circle cross-red"></i>';
+        }
+        html += `<td>${val}</td>`;
+      });
+      
+      html += `</tr>`;
+    });
+
+    $("#comparisonBody").html(html);
+    $("#comparisonSection").fadeIn(400);
+    
+    // Scroll to results
+    $('html, body').animate({ 
+      scrollTop: $("#comparisonSection").offset().top - 100 
+    }, 600);
+  });
+});
+</script>
+
+</body>
+</html>

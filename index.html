@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madam Boutique</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon-logo.png" sizes="32x32">
+  <link rel="shortcut icon" href="./favicon-logo.png">
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="navbar-brand">
+    <img src="./logo.png" class="navbar-logo" alt="Madam Boutique">
+  </div>
+
+  <nav>
+    <ul id="menu">
+      <li><a href="#">HOME</a></li>
+      <li><a href="#sale" onclick="event.preventDefault(); showHome('sale');">SALE</a></li>
+      <li><a href="#new" onclick="event.preventDefault(); showHome('newArrival');">NEW ARRIVAL</a></li>
+      <li><a href="#summer" onclick="event.preventDefault(); showHome('summer');">SUMMER</a></li>
+      <li><a href="#winter" onclick="event.preventDefault(); showHome('winter');">WINTER</a></li>
+      <li><a href="#gallery" onclick="event.preventDefault(); showHome('gallery');">GALLERY</a></li>
+            <li><a href="#accessories" onclick="event.preventDefault(); showHome('accessories');">ACCESSORIES</a></li>
+
+      <li><a href="compare.html">COMPARE</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-icons">
+    <span class="signin-text" data-bs-toggle="modal" data-bs-target="#loginModal">
+      
+      Sign in
+    </span>
+
+    <i class="fa-regular fa-user" onclick="showContact()" title="Contact Us"></i>
+    <div class="cart-wrapper" id="cartIcon">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartCount">0</span>
+        <div class="cart-dropdown" id="cartDropdown"></div>
+    </div>
+    <i class="fa-solid fa-bars menu-toggle" id="toggle"></i>
+  </div>
+</header>
+
+<div class="slider">
+  <div class="slides" id="slides">
+
+    <div class="slide">
+      <img src="./summer banner.png" alt="Summer Collection">
+    </div>
+    <div class="slide">
+      <img class="sale-slide" src="./sale banner .png" alt="Sale">
+    </div>
+    <div class="slide">
+      <img src="./winter banner.png" alt="Winter Collection">
+    </div>v
+  </div>
+
+  <button class="arrow prev" onclick="prev()" aria-label="Previous slide">&#10094;</button>
+  <button class="arrow next" onclick="next()" aria-label="Next slide">&#10095;</button>
+  <div class="options-bar">
+    <span id="summer" onclick="event.preventDefault(); goTo(0);">Summer</span>
+    <span id="sale" class="active" onclick="event.preventDefault(); goTo(1);">Sale</span>
+    <span id="winter" onclick="event.preventDefault(); goTo(2);">Winter</span>
+  </div>
+</div>
+
+<div class="x-sale-head">
+      <h2 class="x-sale-title">Sale</h2>
+      <p class="x-sale-sub">Don't miss out on our exclusive deals and discounts</p>
+</div>
+
+    <div class="x-sale-grid">
+            <article class="x-sale-card">
+        <div class="x-media-wrap">
+          <span class="x-discount-badge">30% OFF</span>
+          <img src="./pic7.webp" alt="Blue Lawn Sale">
+        </div>
+        <div class="x-card-body">
+          <h4>Blue Lawn Sale</h4>
+          <div class="x-price-row">
+            <span class="x-price">PKR 2,499</span>
+            <del>PKR 3,499</del>
+          </div>
+          <div class="x-meta-row">
+            <span class="x-stars">★ 4.5</span>
+          </div>
+          <button class="x-cart-btn" onclick="openProduct(504)">View Details</button>
+        </div>
+      </article>
+
+      <article class="x-sale-card">
+        <div class="x-media-wrap">
+          <span class="x-discount-badge">35% OFF</span>
+          <img src="velvet2.webp" alt="">
+        </div>
+        <div class="x-card-body">
+          <h4>Valvet Set sale</h4>
+          <div class="x-price-row">
+            <span class="x-price">PKR 3,990</span>
+            <del>PKR 5990</del>
+          </div>
+          <div class="x-meta-row">
+            <span class="x-stars">★ 5</span>
+          </div>
+          <button class="x-cart-btn" onclick="openProduct(505)">View Details</button>
+        </div>
+      </article>
+
+      <article class="x-sale-card">
+        <div class="x-media-wrap">
+          <span class="x-discount-badge">33% OFF</span>
+          <img src="./new7.webp" alt="Hursil Dress">
+        </div>
+        <div class="x-card-body">
+          <h4>Hursil Dress</h4>
+          <div class="x-price-row">
+            <span class="x-price">PKR 11,999</span>
+            <del>PKR 17999</del>
+          </div>
+          <div class="x-meta-row">
+            <span class="x-stars">★ 4.5</span>
+          </div>
+          <button class="x-cart-btn" onclick="openProduct(107)">View Details</button>
+        </div>
+      </article>
+
+      <article class="x-sale-card">
+        <div class="x-media-wrap">
+          <span class="x-discount-badge">35% OFF</span>
+          <img src="winter10.webp" alt="Embroidered 2Pc Velvet">
+        </div>
+        <div class="x-card-body">
+          <h4>Embroidered 2Pc Velvet</h4>
+          <div class="x-price-row">
+            <span class="x-price">PKR 10,867</span>
+            <del>PKR 15,999</del>
+          </div>
+          <div class="x-meta-row">
+            <span class="x-stars">★ 4</span>
+          </div>
+          <button class="x-cart-btn" onclick="openProduct(204)">View Details</button>
+        </div>
+      </article>
+
+    </div>
+    <div class="x-sale-footer">
+      <a href="#sale" onclick="event.preventDefault(); showHome('sale');" class="x-view-btn">VIEW ALL SALE ITEMS →</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="why-buy">
+  <div class="container2">
+    <h2>Why Buy From Madam Boutique</h2>
+
+    <div class="features">
+      <div class="feature-box">
+        <i class="fas fa-undo-alt"></i>
+        <h3>Easy Returns</h3>
+        <p>Shop with confidence through our smooth and customer-friendly return policy.</p>
+      </div>
+
+      <div class="feature-box">
+        <i class="fas fa-tags"></i>
+        <h3>Best Value Pricing</h3>
+        <p>Luxury fashion pieces priced fairly without compromising quality.</p>
+      </div>
+
+      <div class="feature-box">
+        <i class="fas fa-truck"></i>
+        <h3>Fast Delivery</h3>
+        <p>Quick order processing and reliable nationwide delivery service.</p>
+      </div>
+
+      <div class="feature-box">
+        <i class="fas fa-user-shield"></i>
+        <h3>Trusted Boutique</h3>
+        <p>A boutique known for elegance, authenticity, and customer satisfaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners-section">
+  <h2 class="partners-title">Our Partners</h2>
+
+  <div class="partners-slider">
+    <button class="arrow left" aria-label="Previous partner">&#10094;</button>
+
+    <div class="partners-track" id="track">
+      <div class="partner"><img src="./Zellbury_logo.png" alt="Zellbury"></div>
+      <div class="partner"><img src="./zeen.png" alt="Zeen"></div>
+      <div class="partner"><img src="./Name_Bow_-_Blue.webp" alt="Partner"></div>
+      <div class="partner"><img src="./zeen.png" alt="Zeen"></div>
+      <div class="partner"><img src="./Zellbury_logo.png" alt="Zellbury"></div>
+      <div class="partner"><img src="./zeen.png" alt="Zeen"></div>
+      <div class="partner"><img src="./Name_Bow_-_Blue.webp" alt="Partner"></div>
+    </div>
+
+    <button class="arrow right" aria-label="Next partner">&#10095;</button>
+  </div>
+</section>
+
+<div id="home-view" class="container mt-4">
+  <div class="category-header text-center mb-5">
+    <h2 id="categoryTitle" class="category-title">New Arrivals</h2>
+    <p id="categorySubtitle" class="category-subtitle">Discover our latest collection of elegant fashion pieces</p>
+  </div>
+
+  <div class="row" id="collection-grid"></div>
+
+  <!-- Gallery Section -->
+  <div id="gallerySection" style="display:none;">
+    <h2 class="fw-bold mb-4 text-center">Summer Gallery</h2>
+    <div class="scrolling-wrapper mb-4">
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail1.png" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail2.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail3.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail6.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail7.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail8.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail9.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail10.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail5.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="thumbnail4.png.webp" class="gallery-img" alt="Summer Image"></div></div>
+    </div>
+    
+    <h2 class="fw-bold mb-4 text-center">Winter Gallery</h2>
+    <div class="scrolling-wrapper mb-4">
+      <div class="card-item p-2"><div class="card h-100"><img src="winter1.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter2.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter3.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter4.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter5.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter6.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter7.jpg" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter8.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter9.webp" class="gallery-img" alt="Winter Image"></div></div>
+      <div class="card-item p-2"><div class="card h-100"><img src="winter10.webp" class="gallery-img" alt="Winter Image"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="product-view" class="container" style="display:none;">
+  <button class="btn btn-theme mb-3" onclick="showHome('newArrival')">← Back to Shop</button>
+  <h2 class="fw-bold">Product Details</h2>
+
+  <div class="row mb-5">
+    <div class="col-md-6 text-center">
+      <img id="detail-img" class="img-fluid rounded shadow" style="max-height:500px; object-fit: cover;" alt="Product Image">
+    </div>
+    <div class="col-md-6">
+      <h3 id="detail-title" class="fw-bold mt-3 mt-md-0"></h3>
+      <div id="detail-rating" class="star-rating"></div>
+      <p id="detail-price" class="fw-bold fs-4 text-pink"></p>
+      <p id="detail-desc" class="text-muted"></p>
+      
+      <h6 class="mt-4">Select Size:</h6>
+      <div class="d-flex gap-2 mb-4" id="size-selector">
+        <button class="btn btn-outline-dark size-btn" onclick="selectSize(this, 'S')">S</button>
+        <button class="btn btn-outline-dark size-btn" onclick="selectSize(this, 'M')">M</button>
+        <button class="btn btn-outline-dark size-btn" onclick="selectSize(this, 'L')">L</button>
+      </div>
+
+      <button class="btn btn-pink w-100 py-3" onclick="addToCartFromDetail()">Add to Cart</button>
+    </div>
+  </div>
+  
+  <h2 class="fw-bold mt-5 mb-4">Related Products</h2>
+  <div class="row" id="related-products"></div>
+</div>
+
+
+<div id="contact-view" style="display:none;">
+  <h2 class="text-left px-3">Contact Us</h2>
+  <div class="text-left px-3 contact-details">
+    <p><strong>Address:</strong> Aptech North Nazimabad, Karachi, Pakistan</p>
+    <p><strong>Phone:</strong> (123) 456-7890 | <strong>Email:</strong> info@madamboutique.com</p>
+    <p><strong>Hours:</strong> Mon – Sat: 10 AM – 8 PM</p>
+  </div>
+  <div class="map">
+    <iframe src="https://maps.google.com/maps?q=Aptech+North+Nazimabad&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+            title="Location Map"></iframe>
+  </div>
+</div>
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow">
+      <div class="modal-body p-0">
+        <div class="login-card">
+          <h2 id="loginModalLabel">Sign in</h2>
+
+          <div class="input-group">
+            <i class="ri-user-line"></i>
+            <input type="email" id="loginUsername" placeholder="Enter your Email" aria-label="Email">
+          </div>
+
+          <div class="input-group">
+            <i class="ri-lock-line"></i>
+            <input type="password" id="loginPassword" placeholder="Enter your Password" aria-label="Password">
+            <i class="ri-eye-off-line toggle" onclick="togglePassword()"></i>
+          </div>
+
+          <div class="options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button class="btn-login" id="loginBtn" type="button">Sign in</button>
+
+          <div class="signup">
+            Don't have an account? <a href="#">Sign up</a>
+          </div>
+
+          <div class="or">or connect with</div>
+
+          <div class="social">
+            <button class="facebook" aria-label="Facebook login"><i class="ri-facebook-fill"></i></button>
+            <button class="google" aria-label="Google login"><i class="ri-google-fill"></i></button>
+            <button class="github" aria-label="GitHub login"><i class="ri-github-fill"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-top">
+    <h2>Madam Boutique</h2>
+    <p>Subscribe to receive exclusive offers and updates</p>
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email" aria-label="Email address">
+      <button>SUBSCRIBE</button>
+    </div>
+  </div>
+
+  <div class="footer-content">
+    <div class="footer-box">
+      <h3>Boutique</h3>
+      <p>Your destination for elegant and timeless fashion pieces.</p>
+    </div>
+    <div class="footer-box">
+      <h3>SHOP</h3>
+      <ul>
+        <li onclick="event.preventDefault(); showHome('newArrival');">New Arrivals</li>
+        <li onclick="event.preventDefault(); showHome('sale');">Sale</li>
+        <li onclick="event.preventDefault(); showHome('accessories');">Accessories</li>
+      </ul>
+    </div>
+    <div class="footer-box">
+      <h3>SUPPORT</h3>
+      <ul>
+        <li onclick="event.preventDefault(); showContact();">Contact Us</li>
+        <li>Shipping Info</li>
+        <li>Returns</li>
+      </ul>
+    </div>
+    <div class="footer-box">
+      <h3>FOLLOW US</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com" target="_blank"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank"  aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="copyright">© 2026 Madam Boutique. All Rights Reserved.</div>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
