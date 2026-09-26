@@ -1,29 +1,58 @@
 const express = require('express');
 const router = express.Router();
+const Product = require('../models/Product');
 
-const products = [
-  { id: 101, category: 'newArrival', title: '2 Pc Co-Ord Set', price: 6590, image: 'new1.webp', rating: 4 },
-  { id: 102, category: 'newArrival', title: '3 Pc Embroidered Suit', price: 5210, image: 'new2.webp', rating: 5 },
-  { id: 201, category: 'winter', title: '3Pc Embroidered Co-ords', price: 7750, image: 'kaddar2.webp', rating: 5 },
-  { id: 301, category: 'summer', title: '3 Pc Printed Lawn Suit', price: 3890, image: 'pic1.webp', rating: 4 },
-  { id: 401, category: 'accessories', title: 'Yarn Dyed Muffler', price: 3290, image: 'Muffler.webp', rating: 4 },
-  { id: 501, category: 'sale', title: 'Embroidered Lawn Suit', price: 3990, oldPrice: 5990, image: 'pic1.webp', rating: 5 }
-];
-
-router.get('/', (req, res) => {
-  const { category, search } = req.query;
-  const result = products.filter((product) => {
-    const categoryMatches = !category || category === 'all' || product.category === category;
-    const searchMatches = !search || product.title.toLowerCase().includes(String(search).toLowerCase());
-    return categoryMatches && searchMatches;
-  });
-  res.json(result);
+router.get('/', async (req, res) => {
+  try {
+    const { category, search } = req.query;
+    const filter = {};
+    if (category && category !== 'all') filter.category = category;
+    if (search) filter.title = { $regex: search, $options: 'i' };
+    const products = await Product.find(filter).sort({ createdAt: -1 });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-router.get('/:id', (req, res) => {
-  const product = products.find((item) => item.id === Number(req.params.id));
-  if (!product) return res.status(404).json({ error: 'Product not found' });
-  res.json(product);
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await Product.findOne({ id: Number(req.params.id) });
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/', async (req, res) => {
+  try {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const product = await Product.findOneAndUpdate({ id: Number(req.params.id) }, req.body, { new: true });
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const product = await Product.findOneAndDelete({ id: Number(req.params.id) });
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json({ message: 'Product deleted' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;
