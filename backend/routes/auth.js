@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -13,7 +14,7 @@ router.post('/register', async (req, res) => {
   }
   const normalizedEmail = email.toLowerCase().trim();
   if (users.has(normalizedEmail)) return res.status(409).json({ error: 'User already exists' });
-  const user = { id: crypto.randomUUID?.() || String(Date.now()), name, email: normalizedEmail, password: await bcrypt.hash(password, 12) };
+  const user = { id: crypto.randomUUID(), name, email: normalizedEmail, password: await bcrypt.hash(password, 12) };
   users.set(normalizedEmail, user);
   res.status(201).json({ token: jwt.sign({ id: user.id, email: user.email }, secret(), { expiresIn: '7d' }), user: { id: user.id, name, email: normalizedEmail } });
 });
