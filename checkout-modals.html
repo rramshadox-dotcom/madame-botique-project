@@ -1,0 +1,169 @@
+<!-- AUTHENTICATION CONTAINER -->
+<div id="authContainer" class="auth-container">
+  <!-- Populated by checkout-auth.js -->
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Sign In to Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="loginEmail" name="login_email" placeholder="your@email.com" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" name="login_password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Sign In</button>
+        </form>
+        
+        <div class="text-center mt-3">
+          <p class="text-muted">Don't have an account? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signupModal" class="text-primary">Sign up here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Create Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signupForm">
+          <div class="mb-3">
+            <label for="signupName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="signupName" name="signup_name" placeholder="Your full name" required>
+          </div>
+          <div class="mb-3">
+            <label for="signupEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="signupEmail" name="signup_email" placeholder="your@email.com" required>
+          </div>
+          <div class="mb-3">
+            <label for="signupPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="signupPassword" name="signup_password" placeholder="Create a password (min 6 characters)" required>
+            <small class="text-muted">At least 6 characters</small>
+          </div>
+          <div class="mb-3">
+            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="signupConfirmPassword" name="signup_confirm_password" placeholder="Confirm your password" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Create Account</button>
+        </form>
+        
+        <div class="text-center mt-3">
+          <p class="text-muted">Already have an account? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-primary">Sign in here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="checkout-container">
+          <!-- Cart Summary -->
+          <div class="checkout-summary mb-4">
+            <h6>Order Summary</h6>
+            <div id="checkoutCartItems" class="cart-items-summary">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+          
+          <!-- Checkout Form -->
+          <form id="checkoutForm">
+            <h6 class="mb-3">Shipping Information</h6>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="checkoutName" class="form-label">Full Name *</label>
+                <input type="text" class="form-control" id="checkoutName" name="checkout_name" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="checkoutEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="checkoutEmail" name="checkout_email" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="checkoutPhone" class="form-label">Phone Number *</label>
+                <input type="tel" class="form-control" id="checkoutPhone" name="checkout_phone" placeholder="+92 XXX XXXXXXX" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="checkoutAddress" class="form-label">Address *</label>
+                <input type="text" class="form-control" id="checkoutAddress" name="checkout_address" placeholder="Street address" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="checkoutCity" class="form-label">City *</label>
+                <input type="text" class="form-control" id="checkoutCity" name="checkout_city" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="checkoutCountry" class="form-label">Country *</label>
+                <input type="text" class="form-control" id="checkoutCountry" name="checkout_country" value="Pakistan" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="checkoutPostal" class="form-label">Postal Code</label>
+                <input type="text" class="form-control" id="checkoutPostal" name="checkout_postal">
+              </div>
+            </div>
+            
+            <h6 class="mb-3 mt-4">Payment Method</h6>
+            <div class="mb-3">
+              <select class="form-select" id="checkoutPayment" name="checkout_payment" required>
+                <option value="">-- Select Payment Method --</option>
+                <option value="cod">Cash on Delivery (COD)</option>
+                <option value="bank-transfer">Bank Transfer</option>
+                <option value="easypaisa">Easypaisa</option>
+                <option value="jazzcash">JazzCash</option>
+              </select>
+            </div>
+            
+            <div class="mb-3">
+              <label for="checkoutNotes" class="form-label">Order Notes (Optional)</label>
+              <textarea class="form-control" id="checkoutNotes" name="checkout_notes" rows="2" placeholder="Any special requests or delivery instructions"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100 btn-lg">Place Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS MODAL -->
+<div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-labelledby="orderSuccessLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center p-5" id="orderSuccessContent">
+        <!-- Populated by checkout-auth.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
